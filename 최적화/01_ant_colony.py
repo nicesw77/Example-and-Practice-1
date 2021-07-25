@@ -3,12 +3,14 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-area = np.ones([20, 20])
-start = (1, 1)
-goal = (19, 14)
+area = np.ones([20, 20])  # 지역 생성
+start = (1, 1)  # 개미 출발지점
+goal = (19, 14)  # 도착해야 하는 지점
+path_count = 40  # 경로를 만들 개미 수
+path_max_len = 20 * 20  # 최대 경로 길이
 
-pheromone = 1.0
-volatility = 0.3
+pheromone = 1.0  # 페로몬 가산치
+volatility = 0.3  # 스탭 당 페로몬 휘발율
 
 
 def get_neighbors(x, y):
@@ -23,13 +25,13 @@ def get_neighbors(x, y):
 
 
 def ant_path_finding():
+    """개미 경로 생성"""
     path = [start]
     x, y = start
     count = 0
     while x != goal[0] or y != goal[1]:
         count += 1
-        if count > 400:
-            # print("Path Finding Fail")
+        if count > path_max_len:
             return None
         neighbors = get_neighbors(x, y)
         values = np.array([area[i, j] for i, j in neighbors])
@@ -42,6 +44,7 @@ def ant_path_finding():
 
 
 def step_end(path):
+    """경로를 따라 페로몬을 더하고 전 지역의 페로몬을 한번 휘발시킴"""
     global area
     if path is None:
         return
@@ -51,22 +54,24 @@ def step_end(path):
     return
 
 
-count = 0
-while count < 40:
-    path = ant_path_finding()
-    if path is None:
-        continue
-    count += 1
-    print(count)
-    step_end(path)
-    if count < 20:
-        continue
+if __name__ == "__main__":
+    # 계산 및 그래프 작성
+    count = 0
+    while count < path_count:
+        path = ant_path_finding()
+        if path is None:
+            continue
+        count += 1
+        print(f"Ant Pathfinding: {count} / {path_count}")
+        step_end(path)
+
+    # 최종 경로와 페로몬 맵 그리기
     x, y = [], []
     for _x, _y in path:
         x.append(_x)
         y.append(_y)
     plt.plot(x, y, "b", alpha=0.3)
-plt.imshow(area.T, cmap="Greens")
-plt.xlim(0, 20)
-plt.ylim(0, 20)
-plt.show()
+    plt.imshow(area.T, cmap="Greens")
+    plt.xlim(0, 20)
+    plt.ylim(0, 20)
+    plt.show()
