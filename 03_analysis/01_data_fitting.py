@@ -43,4 +43,4 @@ for idx, deg in enumerate(degs):
     ax.text(0.05, -0.9, f"DEG: {deg}, $R^2$:{sqr:.3f}", fontsize=10)
     ax.plot(x, y, ".k")
     ax.plot(new_x, fit(new_x), "--r", label="DEG: {}".format(deg))
-plt.savefig("fitting.png", bbox_inches="tight")
+plt.savefig("01_data_fitting.png", bbox_inches="tight")

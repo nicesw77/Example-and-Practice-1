@@ -26,5 +26,5 @@ if __name__ == "__main__":
     plt.xlim(0, 1)
     plt.ylim(-1.5, 1.5)
     plt.grid(True)
-    plt.savefig("data_plot_1.png", bbox_inches="tight")
-    # plt.show()
+    # plt.savefig("data_plot_1.png", bbox_inches="tight")
+    plt.show()
