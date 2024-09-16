@@ -1,6 +1,6 @@
-"""함수 그래프 그리기
-sin(x) 함수를 지정한 범위 [0, 3Pi]의 그래프로 그려서 출력하기
-"""
+#함수 그래프 그리기
+#sin(x) 함수를 지정한 범위 [0, 3Pi]의 그래프로 그려서 출력하기
+
 import numpy as np
 import matplotlib.pyplot as plt
 
